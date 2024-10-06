@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react'; // React is not needed anymore
 import Hls from 'hls.js';
-import './Overlay.css'; // Create a CSS file for overlay styles
+import PropTypes from 'prop-types';
 
 const VideoPlayer = ({ url }) => {
   const videoRef = useRef(null);
-  const [overlay, setOverlay] = useState({ text: 'Custom Overlay', x: 50, y: 50, size: 20 });
 
   useEffect(() => {
     if (Hls.isSupported()) {
@@ -16,32 +15,19 @@ const VideoPlayer = ({ url }) => {
     }
   }, [url]);
 
-  const handleOverlayDrag = (e) => {
-    setOverlay({
-      ...overlay,
-      x: e.clientX,
-      y: e.clientY,
-    });
-  };
-
   return (
-    <div style={{ position: 'relative' }}>
-      <video ref={videoRef} controls style={{ width: '100%', height: 'auto' }} />
-      <div
-        className="overlay"
-        style={{
-          position: 'absolute',
-          left: `${overlay.x}px`,
-          top: `${overlay.y}px`,
-          fontSize: `${overlay.size}px`,
-          cursor: 'move',
-        }}
-        onMouseDown={handleOverlayDrag}
-      >
-        {overlay.text}
-      </div>
+    <div>
+      <video
+        ref={videoRef}
+        controls
+        style={{ width: '100%', height: 'auto' }}
+      />
     </div>
   );
+};
+
+VideoPlayer.propTypes = {
+  url: PropTypes.string.isRequired,
 };
 
 export default VideoPlayer;
