@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://interactive-livestream-platform-with.onrender.com';
+const API_URL = 'http://localhost:5000';
 
 export const createOverlay = (overlayData) => axios.post(`${API_URL}/overlay`, overlayData);
 
