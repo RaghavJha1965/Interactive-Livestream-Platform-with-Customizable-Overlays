@@ -19,10 +19,10 @@ const VideoPlayer = ({ url }) => {
       videoRef.current.src = url;
     }
   
-   
+    // Fetch overlays from the backend
     getOverlays()
       .then((response) => {
-        setOverlays(response.data); 
+        setOverlays(response.data); // Load overlays from the backend
       })
       .catch((error) => {
         console.error("Error fetching overlays:", error);
@@ -81,7 +81,7 @@ const VideoPlayer = ({ url }) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-      setNewOverlayImage(reader.result); 
+      setNewOverlayImage(reader.result); // Save the image as a base64 string
     };
     if (file) {
       reader.readAsDataURL(file);
@@ -95,7 +95,7 @@ const VideoPlayer = ({ url }) => {
       <div className="relative w-full max-w-4xl rounded-lg shadow-lg overflow-hidden video-wrapper">
         <video ref={videoRef} controls className="w-full rounded-lg" />
 
-        
+        {/* Render overlays */}
         {overlays.map((overlay, index) => (
           <Rnd
             key={index}
@@ -121,7 +121,7 @@ const VideoPlayer = ({ url }) => {
         ))}
       </div>
 
-      
+      {/* Input for creating new overlays */}
       <div className="flex flex-col mt-4 space-y-3">
         <input
           type="text"
@@ -146,7 +146,6 @@ const VideoPlayer = ({ url }) => {
     </div>
   );
 };
-
 
 VideoPlayer.propTypes = {
   url: PropTypes.string.isRequired,
