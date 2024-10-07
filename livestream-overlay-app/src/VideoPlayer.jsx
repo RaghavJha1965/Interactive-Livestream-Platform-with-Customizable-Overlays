@@ -19,10 +19,10 @@ const VideoPlayer = ({ url }) => {
       videoRef.current.src = url;
     }
   
-    // Fetch overlays from backend when the page loads
+   
     getOverlays()
       .then((response) => {
-        setOverlays(response.data);  // Populate the state with saved overlays from the backend
+        setOverlays(response.data); 
       })
       .catch((error) => {
         console.error("Error fetching overlays:", error);
@@ -30,8 +30,8 @@ const VideoPlayer = ({ url }) => {
   }, [url]);
 
   const handleCreateOverlay = () => {
-    const randomX = Math.floor(Math.random() * 300); // Randomize x position
-    const randomY = Math.floor(Math.random() * 300); // Randomize y position
+    const randomX = Math.floor(Math.random() * 300); 
+    const randomY = Math.floor(Math.random() * 300); 
 
     const newOverlay = {
       text: newOverlayText,
@@ -53,8 +53,8 @@ const VideoPlayer = ({ url }) => {
       x: d.x,
       y: d.y,
     };
-    setOverlays(updatedOverlays);  // Update the position in state
-    updateOverlay(updatedOverlays[index]._id, updatedOverlays[index]); // Optionally update in backend
+    setOverlays(updatedOverlays);  
+    updateOverlay(updatedOverlays[index]._id, updatedOverlays[index]); 
   };
 
   const handleOverlayResizeStop = (index, ref, position) => {
@@ -66,8 +66,8 @@ const VideoPlayer = ({ url }) => {
       x: position.x,
       y: position.y,
     };
-    setOverlays(updatedOverlays);  // Update the position and size in state
-    updateOverlay(updatedOverlays[index]._id, updatedOverlays[index]); // Optionally update in backend
+    setOverlays(updatedOverlays);  
+    updateOverlay(updatedOverlays[index]._id, updatedOverlays[index]); 
   };
 
   const handleDeleteOverlay = (index) => {
@@ -81,7 +81,7 @@ const VideoPlayer = ({ url }) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-      setNewOverlayImage(reader.result); // Save base64 of the image
+      setNewOverlayImage(reader.result); 
     };
     if (file) {
       reader.readAsDataURL(file);
@@ -95,13 +95,13 @@ const VideoPlayer = ({ url }) => {
       <div className="relative w-full max-w-4xl rounded-lg shadow-lg overflow-hidden video-wrapper">
         <video ref={videoRef} controls className="w-full rounded-lg" />
 
-        {/* Draggable and resizable overlays */}
+        
         {overlays.map((overlay, index) => (
           <Rnd
             key={index}
             size={{ width: overlay.width, height: overlay.height }}
             position={{ x: overlay.x, y: overlay.y }}
-            bounds=".video-wrapper" // Restrict overlays within the video container
+            bounds=".video-wrapper"
             onDragStop={(e, d) => handleOverlayDragStop(index, d)}
             onResizeStop={(e, direction, ref, delta, position) => handleOverlayResizeStop(index, ref, position)}
             enableResizing={{
@@ -121,7 +121,7 @@ const VideoPlayer = ({ url }) => {
         ))}
       </div>
 
-      {/* Inputs for both text and image */}
+      
       <div className="flex flex-col mt-4 space-y-3">
         <input
           type="text"
@@ -147,7 +147,7 @@ const VideoPlayer = ({ url }) => {
   );
 };
 
-// Define propTypes to validate props
+
 VideoPlayer.propTypes = {
   url: PropTypes.string.isRequired,
 };
