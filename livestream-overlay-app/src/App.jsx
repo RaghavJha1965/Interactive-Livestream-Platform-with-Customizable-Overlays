@@ -2,7 +2,7 @@ import { useState } from 'react';
 import VideoPlayer from './VideoPlayer';
 
 const App = () => {
-  const [url, setUrl] = useState('https://your-rtsp-stream-url.m3u8');
+  const [url, setUrl] = useState('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8');
 
   return (
     <div className="App">

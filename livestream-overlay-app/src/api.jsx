@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000'; // Assuming Flask runs on port 5000
+const API_URL = 'http://localhost:5000'; // Backend URL
 
 export const createOverlay = (overlayData) => axios.post(`${API_URL}/overlay`, overlayData);
 
